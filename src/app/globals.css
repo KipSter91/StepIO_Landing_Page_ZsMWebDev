@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;500;700&display=swap");
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: #0f1420;
+  }
+  body {
+    @apply bg-darkBackground text-white font-sans min-h-screen;
+    background: linear-gradient(120deg, #0f1420 0%, #131824 100%);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-cyber;
+    letter-spacing: 0.04em;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-black font-bold py-3 px-8 rounded-full shadow-card hover:scale-105 transition-all duration-300 border-2 border-primary;
+  }
+  .btn-secondary {
+    @apply border-2 border-primary text-primary font-bold py-3 px-8 rounded-full hover:bg-primary hover:text-black transition-all duration-300;
+  }
+  .card {
+    @apply bg-darkCard/90 backdrop-blur-md border border-darkBorder rounded-card p-6 shadow-card;
+  }
+  .gradient-text {
+    background: linear-gradient(90deg, #00ffcc 0%, #b45fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  .progress-bar {
+    @apply h-1.5 bg-xpBackground rounded-full overflow-hidden;
+  }
+  .progress-fill {
+    @apply h-full rounded-full;
+  }
+
+  /* Hero animation for SSR-safe loading */
+  .animate-fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+  }
+
+  /* Custom responsive utilities for extra small screens */
+  @media (max-width: 480px) {
+    .xs-text-sm {
+      font-size: 14px;
+    }
+    .xs-text-base {
+      font-size: 16px;
+    }
+    .xs-text-lg {
+      font-size: 18px;
+    }
+    .xs-text-xl {
+      font-size: 20px;
+    }
+    .xs-text-2xl {
+      font-size: 24px;
+    }
+    .xs-text-3xl {
+      font-size: 30px;
+    }
+    .xs-text-4xl {
+      font-size: 36px;
+    }
+
+    .xs-p-4 {
+      padding: 1rem;
+    }
+    .xs-px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .xs-py-8 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .xs-mb-6 {
+      margin-bottom: 1.5rem;
+    }
+    .xs-mb-8 {
+      margin-bottom: 2rem;
+    }
+    .xs-mt-8 {
+      margin-top: 2rem;
+    }
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  .animate-gradient-move {
+    background: linear-gradient(120deg, #181c2a 0%, #23273a 50%, #181c2a 100%);
+    background-size: 200% 200%;
+    animation: gradientMove 8s ease-in-out infinite;
+  }
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-16px);
+    }
+  }
+  .animate-float-logo {
+    animation: floatY 3.5s ease-in-out infinite;
+  }
+  @keyframes logoZoom {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.13);
+    }
+  }
+  .animate-logo-zoom {
+    animation: logoZoom 7s ease-in-out infinite;
+  }
+
+  /* Section background color utilities for alternating backgrounds */
+  .bg-section-dark {
+    background: #101522;
+  }
+  .bg-section-darker {
+    background: #0b0e17;
+  }
+  .bg-section-light {
+    background: #181c2a;
+  }
+  .bg-section-gradient {
+    background: linear-gradient(120deg, #0f1420 0%, #181c2a 100%);
+  }
+}
