@@ -98,7 +98,6 @@ export default function Download() {
           </div>
           {/* Download buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            {" "}
             {/* reduced bottom margin */}
             <button
               onClick={handleDownload}
@@ -209,7 +208,6 @@ export default function Download() {
           </div>
           {/* Installation note */}
           <div className="mt-8 max-w-2xl mx-auto">
-            {" "}
             {/* reduced top margin */}
             <div className="bg-darkCard/90 border border-info/30 rounded-xl p-6 shadow-card">
               <div className="flex items-start space-x-3">

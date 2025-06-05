@@ -211,7 +211,8 @@ export default function Hero() {
           duration: 0.7,
           type: "spring",
           stiffness: 60,
-        }}>
+        }}
+        >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}>

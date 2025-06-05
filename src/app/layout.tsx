@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "../components/Header";
+import LayoutClient from "@/components/LayoutClient";
+import { SplashProvider } from "@/contexts/SplashContext";
 
 export const metadata: Metadata = {
   title: "StepIO - Your Personal Fitness Companion",
@@ -45,8 +46,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Header />
-        {children}
+        <SplashProvider>
+          <LayoutClient>{children}</LayoutClient>
+        </SplashProvider>
       </body>
     </html>
   );
