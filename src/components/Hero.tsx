@@ -203,7 +203,7 @@ export default function Hero() {
       </motion.div>
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2"
+        className="hidden sm:block absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -211,8 +211,7 @@ export default function Hero() {
           duration: 0.7,
           type: "spring",
           stiffness: 60,
-        }}
-        >
+        }}>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}>

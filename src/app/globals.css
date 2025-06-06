@@ -155,4 +155,62 @@
   .bg-section-gradient {
     background: linear-gradient(120deg, #0f1420 0%, #181c2a 100%);
   }
+
+  /* 3D Carousel Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Shimmer animation for glassmorphism cards */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-12deg);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  /* Enhanced neon effects */
+  @keyframes neon-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc,
+        0 0 20px #00ffcc;
+      opacity: 0.8;
+    }
+    50% {
+      box-shadow: 0 0 10px #b45fff, 0 0 20px #b45fff, 0 0 30px #b45fff,
+        0 0 40px #b45fff;
+      opacity: 1;
+    }
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-neon-pulse {
+    animation: neon-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
 }
