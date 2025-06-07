@@ -1,122 +1,47 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { motion, useAnimation, PanInfo } from "framer-motion";
+import { motion, PanInfo } from "framer-motion";
+import {
+  FaWalking,
+  FaMapMarkedAlt,
+  FaChartBar,
+  FaSyncAlt,
+  FaMobileAlt,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 
 const features = [
   {
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M13 10V3L4 14h7v7l9-11h-7z"
-        />
-      </svg>
-    ),
+    icon: <FaWalking className="w-8 h-8" />,
     title: "Step Tracking",
     description:
       "Accurate step counting with advanced algorithms and real-time updates throughout your day.",
   },
   {
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-        />
-      </svg>
-    ),
+    icon: <FaMapMarkedAlt className="w-8 h-8" />,
     title: "Path Tracking",
     description:
-      "Map your routes with GPS precision and visualize your walking and running paths in real-time.",
+      "Map your routes with GPS precision and visualize your walking paths in real-time and save them for later.",
   },
   {
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-        />
-      </svg>
-    ),
+    icon: <FaChartBar className="w-8 h-8" />,
     title: "Progress Analytics",
     description:
-      "Detailed statistics and progress tracking to help you reach your daily fitness goals.",
+      "Detailed statistics and progress charts to follow your journey.",
   },
   {
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-        />
-      </svg>
-    ),
+    icon: <FaSyncAlt className="w-8 h-8" />,
     title: "Background Service",
     description:
-      "Continuous tracking even when the app is in the background, ensuring no steps are missed.",
+      "Continuous tracking even when the app is in the background or closed, ensuring no steps are missed.",
   },
   {
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-        />
-      </svg>
-    ),
-    title: "Health Focus",
-    description:
-      "Calorie estimation, health insights, and wellness recommendations based on your activity.",
-  },
-  {
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-        />
-      </svg>
-    ),
+    icon: <FaMobileAlt className="w-8 h-8" />,
     title: "Mobile Optimized",
     description:
-      "Native Android experience with smooth performance and intuitive user interface.",
+      "Native Android experience with smooth performance and cyberpunk user interface.",
   },
 ];
 
@@ -124,7 +49,6 @@ export default function Features() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const controls = useAnimation();
   const constraintsRef = useRef(null);
   // Detect mobile device for performance optimization
   useEffect(() => {
@@ -213,7 +137,6 @@ export default function Features() {
     <section
       id="features"
       className="bg-section-darker py-20 relative overflow-hidden">
-      {" "}
       {/* Decorative blurred shapes background */}
       <div className="pointer-events-none absolute inset-0 z-0">
         {/* Optimized background shapes using theme colors */}
@@ -231,7 +154,6 @@ export default function Features() {
         />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {" "}
         <div
           className={`text-center mb-8 sm:mb-10 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -246,9 +168,8 @@ export default function Features() {
         </div>
         {/* 3D Carousel Container */}
         <div className="relative max-w-6xl mx-auto">
-          {" "}
           {/* Main Carousel Viewport */}
-          <div className="relative h-[350px] sm:h-[400px] md:h-[450px] perspective-1000 overflow-hidden flex items-center justify-center">
+          <div className="relative h-[350px] sm:h-[400px] md:h-[450px] perspective-1000 overflow-hidden flex items-center justify-center rounded-3xl">
             <motion.div
               ref={constraintsRef}
               className="relative w-full h-full flex items-center justify-center"
@@ -288,8 +209,8 @@ export default function Features() {
                   absOffset === 0
                     ? 1
                     : Math.max(
-                        isMobile ? 0.4 : 0.22,
-                        1 - absOffset * (isMobile ? 0.15 : 0.22)
+                        isMobile ? 0.3 : 0.15,
+                        1 - absOffset * (isMobile ? 0.25 : 0.35)
                       );
                 const isVisible3D = absOffset <= (isMobile ? 2 : 3);
                 return (
@@ -303,6 +224,13 @@ export default function Features() {
                       transformOrigin: "center center",
                       zIndex: absOffset === 0 ? 20 : 10 - absOffset,
                       willChange: isMobile ? "transform" : "transform",
+                      filter:
+                        absOffset !== 0
+                          ? `blur(${Math.min(
+                              absOffset * (isMobile ? 2 : 3),
+                              6
+                            )}px)`
+                          : "none",
                     }}
                     animate={{
                       x,
@@ -324,67 +252,78 @@ export default function Features() {
                           features.length
                       )
                     }>
-                    {" "}
                     {/* Card with enhanced border for Active */}
                     <div className="w-full h-full relative">
-                      {/* Enhanced gradient border for active card */}
+                      {/* Modern rotating gradient border for active card */}
                       {absOffset === 0 && (
-                        <>
-                          {/* Animated gradient border */}
-                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-secondary to-primary opacity-75 animate-pulse"></div>
-                          <div className="absolute inset-[1px] rounded-2xl bg-darkCard"></div>
-                          {/* Glow effect */}
-                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-sm"></div>
-                        </>
+                        <div className="active-card-border"></div>
                       )}
-
                       {/* Main card content */}
                       <div
                         className={`${
                           absOffset === 0
-                            ? "absolute inset-[1px]"
+                            ? "absolute inset-[2px] z-20" /* Higher z-index for content */
                             : "absolute inset-0"
                         } rounded-2xl shadow-2xl ${
                           absOffset === 0
-                            ? "bg-gradient-to-br from-darkCard via-darkCard/95 to-darkCard"
-                            : "bg-gradient-to-br from-darkCard/80 to-darkCard/60 backdrop-blur-md border border-darkBorder/50"
+                            ? "bg-gradient-to-br from-darkCard/95 via-darkCard/90 to-darkCard/95"
+                            : "bg-gradient-to-br from-darkCard/60 to-darkCard/40 backdrop-blur-lg border border-darkBorder/30"
                         }`}
                         style={
                           absOffset === 0
                             ? {
-                                backgroundImage: `linear-gradient(rgba(19, 24, 36, 0.85), rgba(19, 24, 36, 0.9)), url('/images/stepio-background.png')`,
+                                backgroundImage: `linear-gradient(rgba(19, 24, 36, 0.9), rgba(19, 24, 36, 0.95)), url('/images/stepio-background.png')`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundBlendMode: "overlay",
                               }
                             : {}
                         }>
-                        {" "}
-                        {/* Overlay for non-active cards */}
+                        {}
+                        {/* Overlay for non-active cards with enhanced blur effect */}
                         {absOffset !== 0 && (
-                          <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5 rounded-2xl pointer-events-none" />
+                          <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-darkCard/30 to-secondary/10 rounded-2xl pointer-events-none backdrop-blur-sm" />
                         )}
+                        {}
                         {/* Card content */}
-                        <div className="relative p-6 sm:p-8 h-full flex flex-col justify-center items-center text-center z-10">
+                        <div className="relative p-6 sm:p-8 h-full flex flex-col justify-center items-center text-center z-30">
+                          {}
                           <motion.div
-                            className="mb-6 relative text-primary"
+                            className={`mb-6 relative ${
+                              absOffset === 0 ? "text-primary" : "text-gray-500"
+                            }`}
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}>
-                            <div className="absolute inset-0 bg-primary/30 blur-xl rounded-full" />
-                            <div className="relative p-4 bg-primary/20 rounded-full border border-primary/30 backdrop-blur-sm">
+                            <div
+                              className={`absolute inset-0 ${
+                                absOffset === 0
+                                  ? "bg-primary/30"
+                                  : "bg-gray-500/20"
+                              } blur-xl rounded-full`}
+                            />
+                            <div
+                              className={`relative p-4 ${
+                                absOffset === 0
+                                  ? "bg-primary/20 border-primary/30"
+                                  : "bg-gray-500/10 border-gray-500/20"
+                              } rounded-full border backdrop-blur-sm`}>
                               {feature.icon}
                             </div>
                           </motion.div>
-
-                          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 font-cyber gradient-text">
+                          <h3
+                            className={`text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 font-cyber ${
+                              absOffset === 0
+                                ? "gradient-text"
+                                : "text-gray-400"
+                            }`}>
                             {feature.title}
                           </h3>
-
+                          {}
                           <p
                             className={`text-xs sm:text-sm md:text-base leading-relaxed font-sans ${
                               absOffset === 0
                                 ? "text-gray-200"
-                                : "text-darkMuted"
+                                : "text-darkMuted/70"
                             }`}>
                             {feature.description}
                           </p>
@@ -396,7 +335,7 @@ export default function Features() {
                 );
               })}
             </motion.div>
-          </div>{" "}
+          </div>
           {/* Navigation Dots */}
           <div className="flex justify-center items-center mt-6 sm:mt-8 space-x-2 sm:space-x-3">
             {features.map((_, index) => (
@@ -423,18 +362,7 @@ export default function Features() {
               initial={{ scale: 1, x: 0 }}
               whileHover={{ scale: 1.1, x: -5 }}
               whileTap={{ scale: 0.9 }}>
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
+              <FaChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
             <motion.button
               className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-darkCard/80 backdrop-blur-md border border-primary/30 rounded-full flex items-center justify-center text-primary hover:bg-darkCard hover:border-primary/50 transition-all duration-300 shadow-lg"
@@ -442,20 +370,9 @@ export default function Features() {
               initial={{ scale: 1, x: 0 }}
               whileHover={{ scale: 1.1, x: 5 }}
               whileTap={{ scale: 0.9 }}>
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+              <FaChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
-          </div>{" "}
+          </div>
           {/* Progress Bar */}
           <div className="mt-4 sm:mt-6 mx-auto max-w-xs">
             <div className="h-1 bg-darkBorder rounded-full overflow-hidden">

@@ -174,43 +174,73 @@
       transform: translateX(200%) skewX(-12deg);
     }
   }
-
   .animate-shimmer {
     animation: shimmer 3s ease-in-out infinite;
   }
-  /* Enhanced neon effects */
-  @keyframes neon-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc,
-        0 0 20px #00ffcc;
-      opacity: 0.8;
-    }
-    50% {
-      box-shadow: 0 0 10px #b45fff, 0 0 20px #b45fff, 0 0 30px #b45fff,
-        0 0 40px #b45fff;
-      opacity: 1;
-    }
+  /* Modern @property-based rotating gradient border animation */
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
   }
 
-  @keyframes gradient-shift {
+  .active-card-border {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--angle),
+      transparent 0%,
+      transparent 70%,
+      #00ffcc 80%,
+      #b45fff 90%,
+      transparent 100%
+    );
+    padding: 2px;
+    animation: rotate-border 3s linear infinite;
+  }
+
+  .active-card-border::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: calc(1rem - 2px);
+    background:rgba(19, 24, 36, 1);
+    z-index: 1;
+  }
+
+  @keyframes rotate-border {
     0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
+      --angle: 0deg;
     }
     100% {
-      background-position: 0% 50%;
+      --angle: 360deg;
     }
   }
 
-  .animate-neon-pulse {
-    animation: neon-pulse 2s ease-in-out infinite;
-  }
+  /* Fallback for browsers that don't support @property */
+  @supports not (background: conic-gradient(from var(--angle), red, blue)) {
+    .active-card-border {
+      background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        transparent 70%,
+        #00ffcc 80%,
+        #b45fff 90%,
+        transparent 100%
+      );
+      animation: rotate-border-fallback 3s linear infinite;
+    }
 
-  .animate-gradient-shift {
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
+    @keyframes rotate-border-fallback {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   }
 }
