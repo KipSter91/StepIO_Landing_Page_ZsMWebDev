@@ -45,12 +45,37 @@ export default function Hero() {
     <section
       id="hero-section"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-darkBackground pt-20 sm:pt-24 md:pt-20">
-      {/* Gradient background elements */}
+      {" "}
+      {/* Gradient background elements with random movement */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 sm:top-10 sm:left-10 sm:translate-x-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/10 rounded-full blur-2xl sm:blur-3xl"></div>
-        <div className="absolute bottom-4 right-1/2 translate-x-1/2 sm:bottom-10 sm:right-10 sm:translate-x-0 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-secondary/10 rounded-full blur-2xl sm:blur-3xl"></div>
+        <motion.div
+          className="absolute top-4 left-1/2 -translate-x-1/2 sm:top-10 sm:left-10 sm:translate-x-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/10 rounded-full blur-2xl sm:blur-3xl"
+          animate={{
+            x: [0, 30, -20, 40, 0],
+            y: [0, 500, 35, -15, 0],
+            scale: [1, 0.6, 0.9, 1.05, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-4 right-1/2 translate-x-1/2 sm:bottom-10 sm:right-10 sm:translate-x-0 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-secondary/10 rounded-full blur-2xl sm:blur-3xl"
+          animate={{
+            x: [0, -35, 25, -50, 0],
+            y: [0, -500, -30, 25, 0],
+            scale: [1, 0.4, 1.2, 0.95, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
       </div>
-
       {/* Background image with scroll-based zoom, opacity, blur */}
       <motion.div
         className="absolute inset-0 bg-[url('/images/stepio-background.png')] bg-cover bg-center will-change-transform"
@@ -67,7 +92,6 @@ export default function Hero() {
         }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       />
-
       {/* Main content */}
       <motion.div
         className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 sm:py-12"

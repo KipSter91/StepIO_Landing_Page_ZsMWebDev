@@ -1,13 +1,16 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Demo() {
   const [isVisible, setIsVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [bgScale, setBgScale] = useState(1);
+  const [bgOpacity, setBgOpacity] = useState(0.1);
+  const [bgBlur, setBgBlur] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-
   useEffect(() => {
     setMounted(true);
 
@@ -37,10 +40,34 @@ export default function Demo() {
         observer.observe(element);
       }
 
+      // Scroll-based background zoom effect (scale, opacity, blur)
+      const onScroll = () => {
+        const demoSection = document.getElementById("live demo");
+        if (!demoSection) return;
+        const rect = demoSection.getBoundingClientRect();
+        // How much the demo section is scrolled out of view (0 = top, 1 = bottom)
+        const scrollProgress = Math.min(
+          Math.max(-rect.top / rect.height, 0),
+          1
+        );
+        // Scale from 1.0 to 1.35
+        const scale = 1 + scrollProgress * 0.35;
+        // Opacity from 0.10 to 0.18
+        const opacity = 0.1 + scrollProgress * 0.08;
+        // Blur from 0px to 8px
+        const blur = scrollProgress * 8;
+        setBgScale(scale);
+        setBgOpacity(opacity);
+        setBgBlur(blur);
+      };
+
+      window.addEventListener("scroll", onScroll);
+
       return () => {
         if (element) {
           observer.unobserve(element);
         }
+        window.removeEventListener("scroll", onScroll);
       };
     }
   }, []);
@@ -63,12 +90,61 @@ export default function Demo() {
       </section>
     );
   }
-
   return (
     <section
       id="live demo"
       className="py-20 bg-darkBackground relative overflow-hidden">
-      <div className="container mx-auto px-6">
+      {" "}
+      {/* Gradient background elements with random movement */}
+      <div className="absolute inset-0 pointer-events-none">
+        {" "}
+        <motion.div
+          className="absolute top-4 left-1/2 -translate-x-1/2 sm:top-10 sm:left-10 sm:translate-x-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/10 rounded-full blur-2xl sm:blur-3xl"
+          animate={{
+            x: [0, 120, -80, 150, -60, 90, 0],
+            y: [0, -100, 140, -80, 120, -50, 0],
+            scale: [1, 1.3, 0.7, 1.2, 0.8, 1.1, 1],
+            rotate: [0, 180, -90, 270, 45, -135, 0],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-4 right-1/2 translate-x-1/2 sm:bottom-10 sm:right-10 sm:translate-x-0 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-secondary/10 rounded-full blur-2xl sm:blur-3xl"
+          animate={{
+            x: [0, -130, 110, -90, 160, -70, 0],
+            y: [0, 80, -120, 100, -70, 130, 0],
+            scale: [1, 0.6, 1.4, 0.9, 1.3, 0.75, 1],
+            rotate: [0, -150, 120, -60, 200, -90, 0],
+          }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 3,
+          }}
+        />
+      </div>
+      {/* Background image with scroll-based zoom, opacity, blur */}
+      <motion.div
+        className="absolute inset-0 bg-[url('/images/stepio-background.png')] bg-cover bg-center will-change-transform"
+        style={{
+          transform: `scale(${bgScale})`,
+          opacity: bgOpacity,
+          filter: `blur(${bgBlur}px)`,
+        }}
+        initial={{ scale: 1, opacity: 0.1, filter: "blur(0px)" }}
+        animate={{
+          scale: bgScale,
+          opacity: bgOpacity,
+          filter: `blur(${bgBlur}px)`,
+        }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      />
+      <div className="container mx-auto px-6 relative z-10">
         <div
           className={`text-center mb-8 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"

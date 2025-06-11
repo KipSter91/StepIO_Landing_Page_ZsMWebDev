@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 export default function Download() {
   const [isVisible, setIsVisible] = useState(false);
-  const [downloadCount, setDownloadCount] = useState(127); // Static initial value
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,21 +27,6 @@ export default function Download() {
     };
   }, []);
 
-  // Animated counter only runs when visible
-  useEffect(() => {
-    if (isVisible) {
-      setDownloadCount(0); // Reset to 0 for animation
-      const interval = setInterval(() => {
-        setDownloadCount((prev) => {
-          if (prev < 127) return prev + 1;
-          clearInterval(interval);
-          return 127;
-        });
-      }, 20);
-      return () => clearInterval(interval);
-    }
-  }, [isVisible]);
-
   const handleDownload = () => {
     // This would link to your actual APK file
     // For now, it shows an alert
@@ -59,82 +43,46 @@ export default function Download() {
     <section
       id="download"
       className="bg-section-darker py-16 sm:py-20 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-4 left-4 sm:top-10 sm:left-10 w-64 h-64 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-4 right-4 sm:bottom-10 sm:right-10 w-48 h-48 sm:w-72 sm:h-72 bg-secondary/10 rounded-full blur-3xl"></div>
+      {" "}
+      {/* Decorative blurred shapes background */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        {/* Optimized background shapes using theme colors */}
+        <div
+          className="absolute left-[-80px] bottom-[-120px] w-72 h-72 bg-gradient-to-br from-secondary/30 to-accent/20 rounded-full"
+          style={{ filter: "blur(80px)" }}
+        />
+        <div
+          className="absolute right-[-60px] top-[-60px] w-56 h-56 bg-gradient-to-bl from-primary/30 to-info/20 rounded-full"
+          style={{ filter: "blur(60px)" }}
+        />
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-32 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 rounded-full"
+          style={{ filter: "blur(70px)" }}
+        />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div
-          className={`text-center transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`text-center mb-8 sm:mb-10 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 gradient-text font-cyber leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text font-cyber">
             Ready to Start Your <span className="gradient-text">Journey</span>?
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-darkMuted mb-8 sm:mb-12 max-w-3xl mx-auto font-sans px-4">
+          <p className="text-sm sm:text-base md:text-lg text-darkMuted mb-6 sm:mb-8 md:mb-12 max-w-3xl mx-auto font-sans leading-relaxed px-2 sm:px-0">
             Download StepIO now and begin tracking your fitness goals with
             precision and style
-          </p>
-          {/* Download stats */}
-          <div className="mb-12">
-            <div className="inline-flex items-center space-x-2 bg-darkCard/90 backdrop-blur-sm border border-primary/20 rounded-full px-6 py-3 shadow-card">
-              <svg
-                className="w-5 h-5 text-success"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                />
-              </svg>
-              <span className="text-white font-semibold font-cyber">
-                {downloadCount}+ Downloads
-              </span>
-            </div>
-          </div>
+          </p>{" "}
           {/* Download buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            {/* reduced bottom margin */}
             <button
               onClick={handleDownload}
-              className="btn-primary text-lg px-10 py-4 font-cyber">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                />
-              </svg>
-              <span>Download APK</span>
-              <div className="text-xs bg-white/20 px-2 py-1 rounded-full">
-                Free
-              </div>
+              className="btn-primary text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-10 py-3 sm:py-4 font-cyber w-full sm:w-auto min-w-[180px] sm:min-w-[200px] hover:shadow-lg transform hover:scale-105 transition-all duration-300 rounded-[16px]">
+              Download APK
             </button>
             <button
               onClick={handleSourceCode}
-              className="btn-secondary text-lg px-10 py-4 font-cyber">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                />
-              </svg>
-              <span>View Source</span>
+              className="btn-secondary text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-10 py-3 sm:py-4 font-cyber w-full sm:w-auto min-w-[180px] sm:min-w-[200px] hover:shadow-lg transition-all duration-300 rounded-[16px]">
+              View Source
             </button>
           </div>
           {/* App requirements */}
