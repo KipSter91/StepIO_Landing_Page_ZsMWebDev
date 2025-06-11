@@ -32,7 +32,7 @@ export default function Footer() {
             Download
           </a>{" "}
           <a
-            href="https://github.com/yourusername/stepio"
+            href="https://github.com/KipSter91/StepIO_Android_App_ZsMWebDev.git"
             target="_blank"
             rel="noopener"
             className="text-darkMuted hover:text-primary font-sans transition-all flex items-center gap-1">

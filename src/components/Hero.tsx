@@ -52,7 +52,7 @@ export default function Hero() {
           className="absolute top-4 left-1/2 -translate-x-1/2 sm:top-10 sm:left-10 sm:translate-x-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-primary/10 rounded-full blur-2xl sm:blur-3xl"
           animate={{
             x: [0, 30, -20, 40, 0],
-            y: [0, 500, 35, -15, 0],
+            y: [0, 150, 35, -15, 0],
             scale: [1, 0.6, 0.9, 1.05, 1],
           }}
           transition={{
@@ -65,7 +65,7 @@ export default function Hero() {
           className="absolute bottom-4 right-1/2 translate-x-1/2 sm:bottom-10 sm:right-10 sm:translate-x-0 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-secondary/10 rounded-full blur-2xl sm:blur-3xl"
           animate={{
             x: [0, -35, 25, -50, 0],
-            y: [0, -500, -30, 25, 0],
+            y: [0, -150, -30, 25, 0],
             scale: [1, 0.4, 1.2, 0.95, 1],
           }}
           transition={{

@@ -419,10 +419,7 @@ export default function Features() {
               </span>
             </div>
             <p className="text-xs sm:text-sm text-darkMuted font-sans leading-relaxed">
-              This app is currently in beta. Due to memory optimization
-              challenges with background services, extended usage (1+ month) may
-              cause performance issues. Perfect for testing and learning React
-              Native development!
+              This app is developed and maintained by a single developer and is currently in beta. It's completely free to use, but since it's still under development, occasional bugs or issues may occur. If something goes wrong, using "Force Stop" and restarting the app usually fixes it. Thanks for your patience and support!
             </p>
           </div>
         </div>

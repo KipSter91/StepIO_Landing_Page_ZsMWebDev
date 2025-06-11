@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { FaMobileAlt, FaShieldAlt, FaBolt, FaInfoCircle } from "react-icons/fa";
 
 export default function Download() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,18 +27,25 @@ export default function Download() {
       }
     };
   }, []);
-
   const handleDownload = () => {
-    // This would link to your actual APK file
-    // For now, it shows an alert
-    alert(
-      "APK download would start here!\n\nIn a real deployment, this would download the StepIO.apk file from your server."
-    );
+    // Direct link to APK file in public/downloads folder
+    const apkUrl = "/downloads/stepio-1.0.0.apk";
+
+    // Create a temporary link element and trigger download
+    const link = document.createElement("a");
+    link.href = apkUrl;
+    link.download = "stepio-1.0.0.apk";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleSourceCode = () => {
     // Link to your GitHub repository
-    window.open("https://github.com/yourusername/stepio", "_blank");
+    window.open(
+      "https://github.com/KipSter91/StepIO_Android_App_ZsMWebDev.git",
+      "_blank"
+    );
   };
   return (
     <section
@@ -87,20 +95,10 @@ export default function Download() {
           </div>
           {/* App requirements */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {" "}
             <div className="card text-center">
               <div className="text-primary mb-3">
-                <svg
-                  className="w-8 h-8 mx-auto"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  />
-                </svg>
+                <FaMobileAlt className="w-8 h-8 mx-auto" />
               </div>
               <h3 className="font-semibold text-white mb-2 font-cyber">
                 Android 7.0+
@@ -108,21 +106,10 @@ export default function Download() {
               <p className="text-darkMuted text-sm font-sans">
                 Compatible with most modern Android devices
               </p>
-            </div>
+            </div>{" "}
             <div className="card text-center">
               <div className="text-primary mb-3">
-                <svg
-                  className="w-8 h-8 mx-auto"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
+                <FaShieldAlt className="w-8 h-8 mx-auto" />
               </div>
               <h3 className="font-semibold text-white mb-2 font-cyber">
                 Privacy First
@@ -130,21 +117,10 @@ export default function Download() {
               <p className="text-darkMuted text-sm font-sans">
                 Your data stays on your device
               </p>
-            </div>
+            </div>{" "}
             <div className="card text-center">
               <div className="text-primary mb-3">
-                <svg
-                  className="w-8 h-8 mx-auto"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
+                <FaBolt className="w-8 h-8 mx-auto" />
               </div>
               <h3 className="font-semibold text-white mb-2 font-cyber">
                 Low Battery
@@ -156,21 +132,10 @@ export default function Download() {
           </div>
           {/* Installation note */}
           <div className="mt-8 max-w-2xl mx-auto">
-            {/* reduced top margin */}
+            {/* reduced top margin */}{" "}
             <div className="bg-darkCard/90 border border-info/30 rounded-xl p-6 shadow-card">
               <div className="flex items-start space-x-3">
-                <svg
-                  className="w-6 h-6 text-info mt-1 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <FaInfoCircle className="w-6 h-6 text-info mt-1 flex-shrink-0" />
                 <div className="text-left">
                   <h4 className="font-semibold text-info mb-2 font-cyber">
                     Installation Instructions
@@ -186,8 +151,8 @@ export default function Download() {
                       prompts
                     </li>
                     <li>
-                      Grant necessary permissions for step counting and location
-                      access
+                      Grant necessary permissions for step counting, location
+                      access and notifications
                     </li>
                   </ol>
                 </div>
