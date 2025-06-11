@@ -2,6 +2,10 @@
   "name": "stepio-landing-page",
   "version": "0.1.0",
   "private": true,
+  "author": "Zsolt Márku (KipSter91)",
+  "license": "UNLICENSED",
+  "description": "Proprietary landing page for StepIO fitness tracking app - All Rights Reserved",
+  "copyright": "Copyright (c) 2025 Zsolt Márku (KipSter91). All rights reserved.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
