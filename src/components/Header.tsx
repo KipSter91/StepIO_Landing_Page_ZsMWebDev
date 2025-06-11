@@ -7,7 +7,7 @@ import { FaGithub } from "react-icons/fa";
 const BRAND_TEXT = "StepIO";
 
 // Helper to get current section
-const SECTION_IDS = ["features", "screenshots", "download"];
+const SECTION_IDS = ["features", "live demo", "download"];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -96,7 +96,12 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}>
                 <span className="relative inline-block">
-                  {id.charAt(0).toUpperCase() + id.slice(1)}
+                  {id.split(" ").map((word, index) => (
+                    <span key={index}>
+                      {word.charAt(0).toUpperCase() + word.slice(1)}
+                      {index < id.split(" ").length - 1 && " "}
+                    </span>
+                  ))}
                   <span className="absolute left-0 -bottom-1 h-[2.5px] w-full overflow-hidden pointer-events-none">
                     {activeSection === id && (
                       <motion.span
@@ -169,10 +174,10 @@ export default function Header() {
                     Features
                   </a>
                   <a
-                    href="#screenshots"
+                    href="#demo"
                     className="text-white font-sans py-3 px-4 rounded-lg hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20"
                     onClick={() => setMenuOpen(false)}>
-                    Screenshots
+                    Live Demo
                   </a>
                   <a
                     href="#download"

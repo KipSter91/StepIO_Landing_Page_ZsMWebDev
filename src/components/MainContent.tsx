@@ -6,7 +6,7 @@ import { useSplash } from "@/contexts/SplashContext";
 import SplashScreen from "./SplashScreen";
 import Hero from "./Hero";
 import Features from "./Features";
-import Screenshots from "./Screenshots";
+import Demo from "./Demo";
 import Download from "./Download";
 import Footer from "./Footer";
 
@@ -55,7 +55,7 @@ export default function MainContent() {
             }}>
             <Hero />
             <Features />
-            <Screenshots />
+            <Demo />
             <Download />
             <Footer />
           </motion.main>

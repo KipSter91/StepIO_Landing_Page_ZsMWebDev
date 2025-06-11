@@ -23,7 +23,7 @@ const features = [
     icon: <FaMapMarkedAlt className="w-8 h-8" />,
     title: "Path Tracking",
     description:
-      "Map your routes with GPS precision and visualize your walking paths in real-time and save them for later.",
+      "Map your routes with GPS precision, visualize your walking paths in real-time and save them for later.",
   },
   {
     icon: <FaChartBar className="w-8 h-8" />,

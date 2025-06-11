@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description:
     "Track your daily steps, explore new paths, and achieve your fitness goals with StepIO - the ultimate Android fitness tracking app.",
   keywords:
-    "fitness, step counter, health tracking, android app, walking, running, path tracking",
-  authors: [{ name: "StepIO Team" }],
+    "fitness, step counter, health tracking, android app, walking, path tracking",
+  authors: [{ name: "Zsolt Márku" }],
   robots: "index, follow",
   openGraph: {
     title: "StepIO - Your Personal Fitness Companion",
