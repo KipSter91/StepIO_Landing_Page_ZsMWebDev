@@ -17,7 +17,7 @@ A modern, responsive landing page for the StepIO fitness tracking Android applic
 
 ## 🚀 Live Demo
 
-Visit the live demo: [StepIO Landing Page](#) _(Add your deployment URL here)_
+Visit the live demo: **[StepIO Landing Page](https://stepio.zsoltmarku.com/)**
 
 ## 📱 About StepIO
 
