@@ -1,42 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-const screenshots = [
-  {
-    title: "Home Dashboard",
-    description:
-      "Clean and intuitive main interface showing your daily stats and progress",
-    image: "/images/stepio-logo.webp", // Replace with actual screenshot if available
-    alt: "StepIO Home Screen",
-  },
-  {
-    title: "Path Tracking",
-    description:
-      "Real-time GPS tracking with beautiful map visualization of your routes",
-    image: "/images/stepio-background.png", // Replace with actual screenshot if available
-    alt: "StepIO Path Tracking Screen",
-  },
-  {
-    title: "Progress Analytics",
-    description:
-      "Track your progress over time with detailed charts and insights",
-    image: "/images/stepio-logo.webp", // Replace with actual screenshot if available
-    alt: "StepIO Analytics Screen",
-  },
-  {
-    title: "Activity Sessions",
-    description:
-      "Detailed view of your workout sessions with comprehensive statistics",
-    image: "/images/hero-icon.png", // Replace with actual screenshot if available
-    alt: "StepIO Sessions Screen",
-  },
-];
+import { useState, useEffect, useRef } from "react";
 
 export default function Demo() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -46,12 +16,23 @@ export default function Demo() {
         ([entry]) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
+            setIsVideoPlaying(true);
+            // Start video when section comes into view
+            if (videoRef.current) {
+              videoRef.current.play().catch(console.error);
+            }
+          } else {
+            setIsVideoPlaying(false);
+            // Pause video when section goes out of view
+            if (videoRef.current) {
+              videoRef.current.pause();
+            }
           }
         },
-        { threshold: 0.1 }
+        { threshold: 0.3 } // Video starts/stops when 30% of section is visible
       );
 
-      const element = document.getElementById("screenshots");
+      const element = document.getElementById("live demo");
       if (element) {
         observer.observe(element);
       }
@@ -63,26 +44,15 @@ export default function Demo() {
       };
     }
   }, []);
-
-  useEffect(() => {
-    if (mounted) {
-      const interval = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % screenshots.length);
-      }, 4000);
-
-      return () => clearInterval(interval);
-    }
-  }, [mounted]);
-
   if (!mounted) {
     return (
       <section
-        id="screenshots"
+        id="live demo"
         className="py-20 bg-darkBackground relative overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text font-cyber">
-              See It In <span className="gradient-text">Action</span>
+              Live <span className="gradient-text">Demo</span>
             </h2>
             <p className="text-xl text-darkMuted max-w-3xl mx-auto font-sans">
               Take a look at the beautiful and intuitive interface designed for
@@ -96,116 +66,54 @@ export default function Demo() {
 
   return (
     <section
-      id="demo"
+      id="live demo"
       className="py-20 bg-darkBackground relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-8 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text font-cyber">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 gradient-text font-cyber">
             Live <span className="gradient-text">Demo</span>
           </h2>
-          <p className="text-xl text-darkMuted max-w-3xl mx-auto font-sans">
+          <p className="text-sm sm:text-base md:text-lg text-darkMuted mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto font-sans leading-relaxed px-2 sm:px-0">
             Take a look at the beautiful and intuitive interface designed for
             the best user experience
           </p>
         </div>
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          {/* Phone mockup */}
+        <div className="flex justify-center mt-0">
+          {/* Phone mockup - centered */}
           <div
-            className={`lg:w-1/2 flex justify-center transition-all duration-1000 ${
+            className={`flex justify-center transition-all duration-1000 ${
               isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-10"
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
             }`}>
             <div className="relative">
-              {/* Phone frame */}
-              <div className="relative w-[390px] h-[780px] bg-gradient-to-br from-primary/80 via-darkCard to-secondary/80 rounded-[2.5rem] p-[3px] shadow-2xl shadow-primary/30 border-4 border-primary/30">
-                <div className="w-full h-full bg-darkBackground rounded-[2rem] overflow-hidden relative">
+              {/* Phone frame - responsive sizing */}
+              <div className="relative w-[280px] h-[560px] sm:w-[320px] sm:h-[640px] lg:w-[390px] lg:h-[780px] bg-gradient-to-br from-primary/80 via-darkCard to-secondary/80 rounded-[2rem] sm:rounded-[2.2rem] lg:rounded-[2.5rem] p-[2px] sm:p-[2.5px] lg:p-[3px] shadow-2xl shadow-primary/30 border-2 sm:border-3 lg:border-4 border-primary/30">
+                <div className="w-full h-full bg-darkBackground rounded-[1.8rem] sm:rounded-[2rem] lg:rounded-[2rem] overflow-hidden relative">
                   {/* Glass reflection effect */}
                   <div
-                    className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white/30 to-transparent rounded-t-[2rem] pointer-events-none z-20"
+                    className="absolute top-0 left-0 w-full h-16 sm:h-18 lg:h-20 bg-gradient-to-b from-white/30 to-transparent rounded-t-[1.8rem] sm:rounded-t-[2rem] lg:rounded-t-[2rem] pointer-events-none z-20"
                     style={{ filter: "blur(2px)" }}></div>
                   {/* Camera (notch) */}
-                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-black/60 rounded-full z-20 flex items-center justify-center shadow-lg border-2 border-white/20">
-                    <div className="w-2 h-2 bg-gray-300 rounded-full border border-white/60 shadow-inner"></div>
-                  </div>
+                  <div className="absolute top-3 sm:top-3.5 lg:top-4 left-1/2 transform -translate-x-1/2 w-5 h-5 sm:w-5.5 sm:h-5.5 lg:w-6 lg:h-6 bg-black/60 rounded-full z-20 flex items-center justify-center shadow-lg border-2 border-white/20">
+                    <div className="w-1.5 h-1.5 sm:w-1.5 sm:h-1.5 lg:w-2 lg:h-2 bg-gray-300 rounded-full border border-white/60 shadow-inner"></div>
+                  </div>{" "}
                   {/* Screenshot content */}
                   <div className="w-full h-full flex items-center justify-center p-1">
                     <video
+                      ref={videoRef}
                       src="/videos/demo-video.mp4"
-                      autoPlay
                       loop
                       muted
-                      className="w-full h-full object-cover rounded-xl object-center"
-                      style={{
-                        maxHeight: "720px",
-                        aspectRatio: "20/39",
-                        clipPath: "inset(0 4% 0 4%)",
-                      }}
+                      playsInline
+                      className="w-full h-full object-cover rounded-xl object-center video-clip-mobile sm:video-clip-tablet lg:video-clip-desktop"
                     />
                   </div>
                 </div>
               </div>
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-12 h-12 bg-primary/10 rounded-full blur-xl"></div>
-              <div
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl"
-                style={{ animationDelay: "1s" }}></div>
-            </div>
-          </div>
-          {/* Feature descriptions */}
-          <div
-            className={`lg:w-1/2 space-y-8 transition-all duration-1000 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
-            }`}>
-            {screenshots.map((screenshot, index) => (
-              <div
-                key={index}
-                className={`card cursor-pointer transition-all duration-500 ${
-                  index === activeIndex
-                    ? "border-primary/50 bg-darkCard/100 scale-105"
-                    : "border-darkBorder hover:border-primary/30"
-                }`}
-                onClick={() => setActiveIndex(index)}>
-                <div className="flex items-start space-x-4">
-                  <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                      index === activeIndex
-                        ? "bg-gradient-to-br from-primary to-secondary"
-                        : "bg-darkCard"
-                    }`}>
-                    <span className="text-white font-bold font-cyber">
-                      {index + 1}
-                    </span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-white mb-2 font-cyber gradient-text">
-                      {screenshot.title}
-                    </h3>
-                    <p className="text-darkMuted leading-relaxed font-sans">
-                      {screenshot.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-            {/* Progress indicators */}
-            <div className="flex space-x-2 mt-6">
-              {screenshots.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === activeIndex
-                      ? "bg-primary scale-125"
-                      : "bg-darkMuted hover:bg-primary/60"
-                  }`}
-                  onClick={() => setActiveIndex(index)}
-                />
-              ))}
             </div>
           </div>
         </div>

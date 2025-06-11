@@ -161,7 +161,7 @@ export default function Features() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text font-cyber">
             Powerful <span className="gradient-text">Features</span>
           </h2>
-          <p className="text-lg sm:text-xl text-darkMuted max-w-3xl mx-auto font-sans leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-darkMuted mb-6 sm:mb-8 md:mb-12 max-w-3xl mx-auto font-sans leading-relaxed px-2 sm:px-0">
             Everything you need to track, monitor, and improve your daily
             fitness activities
           </p>

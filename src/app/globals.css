@@ -179,7 +179,7 @@
   }
   /* Modern @property-based rotating gradient border animation */
   @property --angle {
-    syntax: '<angle>';
+    syntax: "<angle>";
     initial-value: 0deg;
     inherits: false;
   }
@@ -207,7 +207,7 @@
     position: absolute;
     inset: 2px;
     border-radius: calc(1rem - 2px);
-    background:rgba(19, 24, 36, 1);
+    background: rgba(19, 24, 36, 1);
     z-index: 1;
   }
 
@@ -242,5 +242,24 @@
         transform: rotate(360deg);
       }
     }
+  }
+
+  /* Responsive video clipping for phone mockup */
+  .video-clip-mobile {
+    clip-path: inset(0 4% 0 4%);
+    max-height: 520px;
+    aspect-ratio: 20/39;
+  }
+
+  .video-clip-tablet {
+    clip-path: inset(0 4% 0 4%);
+    max-height: 600px;
+    aspect-ratio: 20/39;
+  }
+
+  .video-clip-desktop {
+    clip-path: inset(0 4% 0 4%);
+    max-height: 720px;
+    aspect-ratio: 20/39;
   }
 }

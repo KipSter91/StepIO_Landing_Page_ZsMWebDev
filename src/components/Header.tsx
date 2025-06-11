@@ -33,7 +33,6 @@ export default function Header() {
       window.removeEventListener("scroll", close);
     };
   }, [menuOpen]);
-
   useEffect(() => {
     const handleScroll = () => {
       let found = "";
@@ -53,6 +52,27 @@ export default function Header() {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Handle smooth scrolling with offset for header
+  const handleSectionClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80; // Adjust this value to control how much space above the section
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+    setMenuOpen(false);
+  };
   return (
     <AnimatePresence>
       <motion.header
@@ -88,6 +108,7 @@ export default function Header() {
               <motion.a
                 key={id}
                 href={`#${id}`}
+                onClick={(e) => handleSectionClick(e, id)}
                 className={
                   `relative text-darkMuted hover:text-primary font-sans transition-all duration-300 hover:scale-105` +
                   (activeSection === id ? " text-primary" : "")
@@ -170,19 +191,19 @@ export default function Header() {
                   <a
                     href="#features"
                     className="text-white font-sans py-3 px-4 rounded-lg hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20"
-                    onClick={() => setMenuOpen(false)}>
+                    onClick={(e) => handleSectionClick(e, "features")}>
                     Features
                   </a>
                   <a
-                    href="#demo"
+                    href="#live demo"
                     className="text-white font-sans py-3 px-4 rounded-lg hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20"
-                    onClick={() => setMenuOpen(false)}>
+                    onClick={(e) => handleSectionClick(e, "live demo")}>
                     Live Demo
                   </a>
                   <a
                     href="#download"
                     className="text-white font-sans py-3 px-4 rounded-lg hover:bg-primary/10 transition-all duration-300 border border-transparent hover:border-primary/20"
-                    onClick={() => setMenuOpen(false)}>
+                    onClick={(e) => handleSectionClick(e, "download")}>
                     Download
                   </a>
                   <a
